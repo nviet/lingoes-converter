@@ -3,7 +3,7 @@
 
 Introduction
 ------------
-Lingoes Converter is a script written in PHP that can convert *.LD2 dictionaries of [Lingoes](http://lingoes.net "Lingoes") into human-readable text files. The script is based on Xiaoyun Zhu analysis ([lingoes-extractor](http://code.google.com/p/lingoes-extractor/)) on the LD2 dictionary format .
+Lingoes Converter is a script written in PHP that can convert *.LD2/*.LDX dictionaries of [Lingoes](http://lingoes.net "Lingoes") into human-readable text files. The script is based on Xiaoyun Zhu analysis ([lingoes-extractor](http://code.google.com/p/lingoes-extractor/)) on the LD2/LDX dictionary format .
 
 Requirements
 ------------
