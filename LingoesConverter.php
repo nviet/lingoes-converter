@@ -9,7 +9,7 @@
 class LingoesConverter
 {
     /*
-     * Path to a *.LD2 dictionary file
+     * Path to a *.LD2/*.LDX dictionary file
      *
      * @access public
      * @var string
@@ -422,10 +422,69 @@ class LingoesConverter
                     $position = ($rightPosition > $leftPosition) 
                         ? $leftPosition : $rightPosition;
                     $xml = substr($xml, $position, $length);
+
+                    # Remove image tags
+                    $xml = preg_replace("/<img .+?\/>/i", "", $xml);
+
+                    # Dictionary cross-reference
+                    $xml = str_replace('dict://key.[$DictID]/', "", $xml);                    
                 } else
                 {
-                    $xml = strip_tags($xml);
+                    /*
+                     * Replace some of Lingoes's custom markup tags
+                     */
+
+                    # Remove self-closing tags except line break
+                    $xml = preg_replace('/<[^>n]+?\/>/', '', $xml); 
+
+                    # Text color
+                    $xml = str_replace('<x K="', '<font color="', $xml); 
+                    $xml = str_replace('</x>', '</font>', $xml);
+
+                    # Dictionary cross-reference
+                    $xml = str_replace('<Y O="', '<a href="', $xml);
+                    $xml = str_replace('</Y>', '</a>', $xml);
+
+                    # Font size
+                    $xml = str_replace('<Ã>', '<span style="font-size:8pt;">', $xml);
+                    $xml = str_replace('</Ã>', '</span>', $xml);
+
+                    # Font size
+                    $xml = str_replace('<Å>', '<span style="font-size:12pt;">', $xml); 
+                    $xml = str_replace('</Å>', '</span>', $xml);
+
+                    # Bold text
+                    $xml = str_replace('<g>', '<strong>', $xml);
+                    $xml = str_replace('</g>', '</strong>', $xml);
+
+                    # Styling elements
+                    $xml = str_replace('<Í P="', '<span style="', $xml);
+                    $xml = str_replace('</Í>', '</span>', $xml);
+
+                    # Special text color
+                    $xml = str_replace('<U>', '<span style="color:#c00000">', $xml);
+                    $xml = str_replace('</U>', '</span>', $xml);
+
+                    # Special text color
+                    $xml = str_replace('<M>', '<span style="color:#009900">', $xml);
+                    $xml = str_replace('</M>', '</span>', $xml);
+
+                    # Unordered list elements
+                    $xml = preg_replace('/<ï>/', '<ul><li>', $xml, 1);
+                    $xml = preg_replace('/<\/ï>(?!.*<\/ï>)/', '</li></ul>', $xml, 1);
+                    $xml = str_replace('<ï>', '<li>', $xml); 
+                    $xml = str_replace('</ï>', '</li>', $xml);
+
+                    # Italic text
+                    $xml = str_replace('<h>', '<em>', $xml);
+                    $xml = str_replace('</h>', '</em>', $xml);
+
+                    # Line break
+                    $xml = str_replace('<n />', '<br />', $xml); 
                 }
+
+                # Escape slashes
+                $xml = str_replace("\\", "\\\\", $xml);
 
                 fseek($this->inflatedHandle, $offsetWord + $lastWordOffset);
                 $word = fread($this->inflatedHandle, ($currentWordOffset - $lastWordOffset));
