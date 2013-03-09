@@ -2,6 +2,7 @@
 if (php_sapi_name() == "cli" || php_sapi_name() == "embed")
 {
     echo PHP_EOL . "Lingoes Converter v0.1" . PHP_EOL;
+    echo "> by WindyLea" . PHP_EOL;
     echo "---" . PHP_EOL;
 
     $input = isset($_SERVER["argv"][1]) ? trim($_SERVER["argv"][1]) : "";

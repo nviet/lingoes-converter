@@ -438,12 +438,12 @@ class LingoesConverter
                     $xml = preg_replace('/<[^>n]+?\/>/', '', $xml); 
 
                     # Text color
-                    $xml = str_replace('<x K="', '<font color="', $xml); 
-                    $xml = str_replace('</x>', '</font>', $xml);
+                    //$xml = str_replace('<x K="', '<font color="', $xml); 
+                    //$xml = str_replace('</x>', '</font>', $xml);
 
                     # Dictionary cross-reference
-                    $xml = str_replace('<Y O="', '<a href="', $xml);
-                    $xml = str_replace('</Y>', '</a>', $xml);
+                    //$xml = str_replace('<Y O="', '<a href="', $xml);
+                    //$xml = str_replace('</Y>', '</a>', $xml);
 
                     # Font size
                     $xml = str_replace('<Ã>', '<span style="font-size:8pt;">', $xml);
@@ -458,8 +458,8 @@ class LingoesConverter
                     $xml = str_replace('</g>', '</strong>', $xml);
 
                     # Styling elements
-                    $xml = str_replace('<Í P="', '<span style="', $xml);
-                    $xml = str_replace('</Í>', '</span>', $xml);
+                    //$xml = str_replace('<Í P="', '<span style="', $xml);
+                    //$xml = str_replace('</Í>', '</span>', $xml);
 
                     # Special text color
                     $xml = str_replace('<U>', '<span style="color:#c00000">', $xml);
